@@ -1,25 +1,23 @@
-provider "aws" {
-  region = "us-east-1"
-  ## if you want to mention the aws credential from different path, enable below line
-  #shared_credentials_file = "$HOME/.aws/credentials"
-  profile = "default"
-  #version                 = ">=2.0"
+terraform {
+  required_providers {
+    docker = {
+      source = "terraform-providers/docker"
+    }
+  }
 }
 
-resource "aws_key_pair" "CCA640-2019" {
-  key_name = "LINUX"
-  ## change here if you are using different key pair
-  public_key = file(pathexpand(var.ssh_key_pair_pub))
+provider "docker" {}
+
+resource "docker_image" "nginx" {
+  name         = "nginx:latest"
+  keep_locally = false
 }
 
-output "ansible-engine" {
-  value = aws_instance.ansible-engine.public_ip
-}
-
-output "ansible-node-1" {
-  value = aws_instance.ansible-nodes[0].public_ip
-}
-
-output "ansible-node-2" {
-  value = aws_instance.ansible-nodes[1].public_ip
+resource "docker_container" "nginx" {
+  image = docker_image.nginx.latest
+  name  = "tutorial"
+  ports {
+    internal = 80
+    external = 8000
+  }
 }
