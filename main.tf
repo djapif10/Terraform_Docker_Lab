@@ -9,12 +9,12 @@ terraform {
 provider "docker" {}
 
 resource "docker_image" "techmax" {
-  name         = "fdjapi10/techmax"
+  name         = "fdjapi10/techmax:v1
   keep_locally = false
 }
 
 resource "docker_container" "TechmaxPro" {
-  image = docker_image.techmax
+  image = docker_image.techmax.v1
   name  = "E-Commerce"
   ports {
     internal = 80
