@@ -14,7 +14,7 @@ resource "docker_image" "techmax" {
 }
 
 resource "docker_container" "TechmaxPro" {
-  image = docker_image.[fdjapi10/techmax].v1.0.0
+  image = docker_image.techmax.v1.0.0
   name  = "E-Commerce"
   ports {
     internal = 80
