@@ -9,7 +9,7 @@ terraform {
 provider "docker" {}
 
 resource "docker_image" "techmax" {
-  name         = "fdjapi10/techmax:v1
+  name         = "fdjapi10/techmax:v1"
   keep_locally = false
 }
 
