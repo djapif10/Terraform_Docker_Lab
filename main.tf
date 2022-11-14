@@ -8,16 +8,16 @@ terraform {
 
 provider "docker" {}
 
-resource "docker_image" "nginx" {
-  name         = "nginx:latest"
+resource "docker_image" "techmax" {
+  name         = "fdjapi10/techmax:v1.0.0"
   keep_locally = false
 }
 
-resource "docker_container" "nginx" {
-  image = docker_image.nginx.latest
-  name  = "tutorial"
+resource "docker_container" "TechmaxPro" {
+  image = docker_image.fdjapi10/techmax:v1.0.0
+  name  = "E-Commerce"
   ports {
     internal = 80
-    external = 8000
+    external = 9000
   }
 }
